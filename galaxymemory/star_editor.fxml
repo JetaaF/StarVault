@@ -3,7 +3,10 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<<<<<<< HEAD
+=======
 <?import javafx.scene.control.ScrollPane?>
+>>>>>>> 5ee3ddb (aa)
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -20,7 +23,10 @@
 
       <HBox layoutX="50.0" layoutY="50.0" prefHeight="668.0" prefWidth="924.0" spacing="50.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="56.0">
          <children>
+<<<<<<< HEAD
+=======
             <!-- Left column: star preview + stats -->
+>>>>>>> 5ee3ddb (aa)
             <VBox alignment="CENTER" prefWidth="300.0" spacing="20.0">
                <children>
                   <StackPane fx:id="starIconContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="250.0">
@@ -50,7 +56,10 @@
                         <Label fx:id="wordCountLabel" styleClass="title-label" text="0" />
                      </children>
                   </HBox>
+<<<<<<< HEAD
+=======
 
+>>>>>>> 5ee3ddb (aa)
                   <VBox alignment="CENTER_LEFT" prefWidth="100.0">
                      <children>
                         <Label styleClass="text-label" text="Star phase (color):">
@@ -76,8 +85,12 @@
                </children>
             </VBox>
 
+<<<<<<< HEAD
+            <VBox prefWidth="574.0" spacing="20.0" HBox.hgrow="ALWAYS">
+=======
             <!-- Right column: title, memory, photos -->
             <VBox prefWidth="574.0" spacing="16.0" HBox.hgrow="ALWAYS">
+>>>>>>> 5ee3ddb (aa)
                <children>
                   <Label styleClass="title-label" text="Title:" />
                   <TextField fx:id="starTitleField" prefHeight="40.0" promptText="Name this memory" styleClass="accent-input" />
@@ -85,6 +98,8 @@
                   <Label styleClass="title-label" text="Memory:" />
                   <TextArea fx:id="starMemoryText" prefHeight="200.0" prefWidth="200.0" promptText="Write here — color shifts every 500 words toward white." styleClass="memo-textarea" VBox.vgrow="ALWAYS" />
 
+<<<<<<< HEAD
+=======
                   <!-- Photos section -->
                   <HBox alignment="CENTER_LEFT" spacing="12.0">
                      <children>
@@ -104,6 +119,7 @@
                      </content>
                   </ScrollPane>
 
+>>>>>>> 5ee3ddb (aa)
                   <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="200.0" spacing="20.0">
                      <children>
                         <Button fx:id="saveStarButton" mnemonicParsing="false" styleClass="accent-button" text="Save &amp; Close" />

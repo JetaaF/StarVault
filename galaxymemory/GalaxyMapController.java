@@ -4,8 +4,10 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -19,7 +21,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 import java.util.List;
+
 import java.util.Random;
+
 
 public class GalaxyMapController {
 
@@ -32,6 +36,7 @@ public class GalaxyMapController {
     @FXML private HBox galaxyFooterBar;
     @FXML private Label galaxyFooterLabel;
     @FXML private StackPane newGalaxyOverlay;
+
     @FXML private TextField searchField;
     @FXML private VBox searchResultsBox;
 
@@ -45,6 +50,7 @@ public class GalaxyMapController {
     private double[] starAlpha;
     private static final int STAR_COUNT = 220;
 
+
     private TextField newGalaxyNameField;
     private StackPane newGalaxyPreviewInner;
     private Label newGalaxyPageLabel;
@@ -53,7 +59,9 @@ public class GalaxyMapController {
     @FXML
     public void initialize() {
         createGalaxyButton.setOnAction(e -> {
+
             if (!isInsideGalaxy) showNewGalaxyOverlay();
+
         });
 
         backButton.setOnAction(event -> {
@@ -64,6 +72,7 @@ public class GalaxyMapController {
 
         newMemoryButton.setOnAction(event -> createNewStar());
         buildNewGalaxyOverlayContent();
+
         setupSearch();
         setupStarCanvas();
         refreshView();
@@ -216,6 +225,7 @@ public class GalaxyMapController {
 
     // ── Galaxy overlay ────────────────────────────────────────
 
+
     private void buildNewGalaxyOverlayContent() {
         Region veil = new Region();
         veil.setMaxWidth(Double.MAX_VALUE);
@@ -253,15 +263,19 @@ public class GalaxyMapController {
         Button nextBtn = new Button(">");
         nextBtn.getStyleClass().add("accent-button");
 
+
         prevBtn.setOnAction(e -> {
             List<String> paths = App.GALAXY_ICONS;
             if (paths.isEmpty()) return;
+
             newGalaxyIconIndex = (newGalaxyIconIndex - 1 + paths.size()) % paths.size();
             refreshNewGalaxyPreview();
         });
         nextBtn.setOnAction(e -> {
             List<String> paths = App.GALAXY_ICONS;
+
             if (paths.isEmpty()) return;
+
             newGalaxyIconIndex = (newGalaxyIconIndex + 1) % paths.size();
             refreshNewGalaxyPreview();
         });
@@ -272,9 +286,11 @@ public class GalaxyMapController {
 
         Button addButton = new Button("Add");
         addButton.getStyleClass().add("accent-button");
+
         HBox addRow = new HBox();
         addRow.setAlignment(Pos.CENTER_RIGHT);
         addRow.getChildren().add(addButton);
+
 
         card.getChildren().addAll(heading, nameCap, newGalaxyNameField, lookCap, previewShell, carousel, addRow);
         VBox.setMargin(previewShell, new Insets(4, 0, 4, 0));
@@ -284,6 +300,7 @@ public class GalaxyMapController {
         addButton.setOnAction(e -> {
             List<String> paths = App.GALAXY_ICONS;
             if (paths.isEmpty()) { hideNewGalaxyOverlay(); return; }
+
             String fullPath = paths.get(newGalaxyIconIndex);
             String name = newGalaxyNameField.getText().trim();
             Galaxy created = new Galaxy(name.isEmpty() ? "New Galaxy" : name, fullPath);
@@ -294,6 +311,7 @@ public class GalaxyMapController {
 
         card.setPickOnBounds(true);
         card.setOnMouseClicked(ev -> ev.consume());
+
         newGalaxyOverlay.getChildren().setAll(veil, card);
         StackPane.setAlignment(card, Pos.CENTER);
     }
@@ -301,10 +319,12 @@ public class GalaxyMapController {
     private void refreshNewGalaxyPreview() {
         newGalaxyPreviewInner.getChildren().clear();
         List<String> paths = App.GALAXY_ICONS;
+
         if (paths.isEmpty()) { newGalaxyPageLabel.setText("0/0"); return; }
         if (newGalaxyIconIndex < 0) newGalaxyIconIndex = 0;
         if (newGalaxyIconIndex >= paths.size()) newGalaxyIconIndex = paths.size() - 1;
         Node graphic = MapGraphics.buildIcon(paths.get(newGalaxyIconIndex), 170, GalaxyMapController.class);
+
         newGalaxyPreviewInner.getChildren().add(graphic);
         newGalaxyPageLabel.setText((newGalaxyIconIndex + 1) + "/" + paths.size());
     }
@@ -323,7 +343,6 @@ public class GalaxyMapController {
         newGalaxyOverlay.setManaged(false);
     }
 
-    // ── View ──────────────────────────────────────────────────
 
     public void refreshView() {
         hideNewGalaxyOverlay();
@@ -337,6 +356,7 @@ public class GalaxyMapController {
             backButton.setVisible(false);
             newMemoryButton.setVisible(false);
             galaxyFooterBar.setVisible(false);
+
             for (Galaxy g : App.allGalaxies) {
                 contentLayer.getChildren().add(createGalaxyNode(g));
             }
@@ -352,6 +372,7 @@ public class GalaxyMapController {
             if (App.currentGalaxyContext != null) {
                 galaxyFooterLabel.setText("Galaxy: " + App.currentGalaxyContext.getName());
             }
+
             if (App.currentGalaxyContext != null) {
                 for (Star s : App.currentGalaxyContext.getStars()) {
                     contentLayer.getChildren().add(createStarNode(s));
@@ -383,7 +404,9 @@ public class GalaxyMapController {
         });
 
         vbox.setOnMouseClicked(mouseEvent -> {
+
             if (DraggableNode.wasDragged(vbox)) return;
+
             if (mouseEvent.getClickCount() == 2 && mouseEvent.getButton() == MouseButton.PRIMARY) {
                 App.currentGalaxyContext = galaxy;
                 isInsideGalaxy = true;
@@ -423,8 +446,10 @@ public class GalaxyMapController {
         });
 
         vbox.setOnMouseClicked(mouseEvent -> {
+
             if (DraggableNode.wasDragged(vbox)) return;
             if (mouseEvent.getClickCount() == 2 && mouseEvent.getButton() == MouseButton.PRIMARY) {
+
                 App.currentStarContext = star;
                 App.screenController.activate(ScreenController.STAR_EDITOR);
             }
@@ -434,15 +459,19 @@ public class GalaxyMapController {
     }
 
     private void createNewStar() {
+
         if (App.currentGalaxyContext == null) return;
         Star newStar = new Star();
         if (!App.STAR_ICONS.isEmpty()) newStar.setAppearanceResource(App.STAR_ICONS.get(0));
         App.currentGalaxyContext.addStar(newStar);
         App.currentStarContext = newStar;
+
         double w = contentLayer.getWidth() > 0 ? contentLayer.getWidth() : 800;
         double h = contentLayer.getHeight() > 0 ? contentLayer.getHeight() : 600;
         newStar.setPosX(w / 2 - 28);
         newStar.setPosY(h / 2 - 28);
+
         App.screenController.activate(ScreenController.STAR_EDITOR);
     }
 }
+

@@ -34,9 +34,11 @@ public class StarEditorController {
     @FXML private Label wordCountLabel;
     @FXML private Label starPhaseLabel;
     @FXML private Region phaseColorSwatch;
+
     @FXML private Button addPhotoButton;
     @FXML private HBox photoStrip;
     @FXML private ScrollPane photoScrollPane;
+
 
     private int currentIconIndex;
 
@@ -46,6 +48,7 @@ public class StarEditorController {
         starNextButton.setOnAction(e -> changeIcon(1));
         saveStarButton.setOnAction(e -> saveAndClose());
         closeEditorButton.setOnAction(e -> closeWithoutSave());
+
         addPhotoButton.setOnAction(e -> pickPhoto());
 
         starMemoryText.textProperty().addListener((observable, oldValue, newValue) -> updateLiveStats(newValue));
@@ -62,15 +65,18 @@ public class StarEditorController {
 
     public void prepareEditor() {
         Star ctx = App.currentStarContext;
+
         if (ctx == null) return;
 
         starTitleField.setText(ctx.getTitle());
         starMemoryText.setText(ctx.getMemory());
 
+
         String appearance = ctx.getAppearanceResource();
         currentIconIndex = 0;
         if (appearance != null && !appearance.isEmpty()) {
             int idx = App.STAR_ICONS.indexOf(appearance);
+
             if (idx >= 0) currentIconIndex = idx;
         }
 
@@ -176,6 +182,7 @@ public class StarEditorController {
         currentIconIndex += direction;
         if (currentIconIndex < 0) currentIconIndex = App.STAR_ICONS.size() - 1;
         if (currentIconIndex >= App.STAR_ICONS.size()) currentIconIndex = 0;
+
         updateIconPreview();
     }
 
@@ -206,9 +213,11 @@ public class StarEditorController {
             }
         }
         if (starPreviewHolder.getChildren().isEmpty()) {
+
             starPreviewHolder.getChildren().add(
                 MapGraphics.buildIcon(MapGraphics.SHAPE_STAR, 200, StarEditorController.class)
             );
+
         }
 
         starPaginationText.setText((currentIconIndex + 1) + "/" + App.STAR_ICONS.size());
@@ -225,12 +234,14 @@ public class StarEditorController {
         Color targetColor = Color.CYAN;
         String phase = "O (Blue)";
 
+
         if (wordCount >= 100) { targetColor = Color.LIGHTBLUE;  phase = "B (Blue-white)"; }
         if (wordCount >= 200) { targetColor = Color.WHITESMOKE; phase = "A (White)"; }
         if (wordCount >= 300) { targetColor = Color.WHITE;      phase = "F (Yellow-white)"; }
         if (wordCount >= 400) { targetColor = Color.WHITE;      phase = "White-hot"; }
 
         starPhaseLabel.setText(phase);
+
         phaseColorSwatch.setStyle("-fx-background-color: " + toRGB(targetColor) + ";");
     }
 
@@ -257,6 +268,8 @@ public class StarEditorController {
     }
 
     private String toRGB(Color c) {
+
         return "rgb(" + (int)(c.getRed() * 255) + "," + (int)(c.getGreen() * 255) + "," + (int)(c.getBlue() * 255) + ")";
     }
 }
+
