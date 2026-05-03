@@ -5,8 +5,6 @@
 package StarVault.galaxymemory;
 
 
-import StarVault.galaxymemory.GalaxyMapController;
-import StarVault.galaxymemory.StarEditorController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -40,12 +38,6 @@ public void loadScreen(String name, String fxmlFile) {
         // Try to find the file relative to THIS class
         URL fxmlLocation = getClass().getResource(fxmlFile);
         
-        if (fxmlLocation == null) {
-            // If it fails, try finding it relative to the root
-            String rootPath = "/StarVault/galaxymemory/" + fxmlFile;
-            fxmlLocation = getClass().getResource(rootPath);
-        }
-
         if (fxmlLocation == null) {
             throw new IOException("Cannot find FXML file at: " + fxmlFile);
         }

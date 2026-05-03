@@ -57,13 +57,13 @@ public class App extends Application {
 
         // Built-in shapes (always available). Add classpath images under src/StarVault/galaxymemory/images/ and list them here. 
 
-        GALAXY_ICONS.add(MapGraphics.SHAPE_GALAXY); 
+        GALAXY_ICONS.add(MapGraphics.SHAPE_GALAXY);
 
-        GALAXY_ICONS.add("/StarVault/galaxymemory/images/galaxy1.jpg"); 
+        GALAXY_ICONS.add("/StarVault/galaxymemory/images/galaxy1.jpg");
 
-        STAR_ICONS.add(MapGraphics.SHAPE_STAR); 
+        GALAXY_ICONS.add("/StarVault/galaxymemory/images/galaxy2.jpg");
 
-        STAR_ICONS.add("/StarVault/galaxymemory/images/star1.png"); 
+        STAR_ICONS.add(MapGraphics.SHAPE_STAR);
 
  
 
