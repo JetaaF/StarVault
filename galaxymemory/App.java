@@ -63,7 +63,19 @@ public class App extends Application {
 
         GALAXY_ICONS.add("/StarVault/galaxymemory/images/galaxy2.jpg");
 
+        GALAXY_ICONS.add("/StarVault/galaxymemory/images/galaxy3.png");
+
+        GALAXY_ICONS.add("/StarVault/galaxymemory/images/galaxy4.png");
+
+        GALAXY_ICONS.add("/StarVault/galaxymemory/images/galaxy5.png");
+
         STAR_ICONS.add(MapGraphics.SHAPE_STAR);
+
+        STAR_ICONS.add("/StarVault/galaxymemory/images/star2.png");
+
+        STAR_ICONS.add("/StarVault/galaxymemory/images/star3.png");
+
+        STAR_ICONS.add("/StarVault/galaxymemory/images/star4.png");
 
  
 

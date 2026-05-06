@@ -144,6 +144,9 @@ public class StarEditorController {
                 DropShadow glow = new DropShadow(10, Color.color(0.5, 0.35, 1.0, 0.6));
                 iv.setEffect(glow);
 
+                iv.setCursor(javafx.scene.Cursor.HAND);
+                iv.setOnMouseClicked(ev -> showPhotoFullscreen(uriPath));
+
                 Button remove = new Button("×");
                 remove.setStyle(
                     "-fx-background-color: rgba(20,8,40,0.85);" +
@@ -177,6 +180,47 @@ public class StarEditorController {
         return container;
     }
 
+    private void showPhotoFullscreen(String uriPath) {
+        if (addPhotoButton.getScene() == null) return;
+        javafx.scene.Parent root = addPhotoButton.getScene().getRoot();
+        if (!(root instanceof javafx.scene.layout.AnchorPane)) return;
+        javafx.scene.layout.AnchorPane rootPane = (javafx.scene.layout.AnchorPane) root;
+
+        StackPane overlay = new StackPane();
+        overlay.setStyle("-fx-background-color: rgba(4,8,28,0.92);");
+        javafx.scene.layout.AnchorPane.setTopAnchor(overlay, 0.0);
+        javafx.scene.layout.AnchorPane.setBottomAnchor(overlay, 0.0);
+        javafx.scene.layout.AnchorPane.setLeftAnchor(overlay, 0.0);
+        javafx.scene.layout.AnchorPane.setRightAnchor(overlay, 0.0);
+
+        Image full = new Image(uriPath, 1024, 768, true, true);
+        ImageView large = new ImageView(full);
+        large.setPreserveRatio(true);
+        large.setFitWidth(900);
+        large.setFitHeight(660);
+
+        Button closeBtn = new Button("✕");
+        closeBtn.setStyle(
+            "-fx-background-color: rgba(20,8,40,0.9);" +
+            "-fx-text-fill: #ffb8c8;" +
+            "-fx-font-size: 18px;" +
+            "-fx-background-radius: 18px;" +
+            "-fx-min-width: 36px;" +
+            "-fx-min-height: 36px;" +
+            "-fx-cursor: hand;"
+        );
+        closeBtn.setOnAction(ev -> rootPane.getChildren().remove(overlay));
+        StackPane.setAlignment(closeBtn, javafx.geometry.Pos.TOP_RIGHT);
+        StackPane.setMargin(closeBtn, new javafx.geometry.Insets(20));
+
+        overlay.getChildren().addAll(large, closeBtn);
+        overlay.setOnMouseClicked(ev -> {
+            if (ev.getTarget() == overlay) rootPane.getChildren().remove(overlay);
+        });
+
+        rootPane.getChildren().add(overlay);
+    }
+
     private void changeIcon(int direction) {
         if (App.STAR_ICONS.isEmpty()) return;
         currentIconIndex += direction;
@@ -202,11 +246,11 @@ public class StarEditorController {
             String res = path.startsWith("/") ? path : "/" + path;
             URL url = StarEditorController.class.getResource(res);
             if (url != null) {
-                Image img = new Image(url.toExternalForm(), 200, 200, true, true);
+                Image img = new Image(url.toExternalForm(), 240, 240, true, true);
                 if (!img.isError()) {
                     ImageView iv = new ImageView(img);
-                    iv.setFitWidth(200);
-                    iv.setFitHeight(200);
+                    iv.setFitWidth(240);
+                    iv.setFitHeight(240);
                     iv.setPreserveRatio(true);
                     starPreviewHolder.getChildren().add(iv);
                 }

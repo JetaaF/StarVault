@@ -83,7 +83,7 @@
                   <TextField fx:id="starTitleField" prefHeight="40.0" promptText="Name this memory" styleClass="accent-input" />
 
                   <Label styleClass="title-label" text="Memory:" />
-                  <TextArea fx:id="starMemoryText" prefHeight="200.0" prefWidth="200.0" promptText="Write here — color shifts every 500 words toward white." styleClass="memo-textarea" VBox.vgrow="ALWAYS" />
+                  <TextArea fx:id="starMemoryText" prefHeight="200.0" prefWidth="200.0" promptText="Write here — color shifts every 500 words toward white." styleClass="memo-textarea" wrapText="true" VBox.vgrow="ALWAYS" />
 
                   <!-- Photos section -->
                   <HBox alignment="CENTER_LEFT" spacing="12.0">
