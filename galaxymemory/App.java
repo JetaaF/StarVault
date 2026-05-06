@@ -51,7 +51,7 @@ public class App extends Application {
 
     public void start(Stage stage) throws Exception { 
 
-        stage.setTitle("Galaxy Memory"); 
+        stage.setTitle("StarVault"); 
 
          
 
